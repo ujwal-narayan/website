@@ -1,0 +1,132 @@
+body {
+
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+display: grid;
+	 grid-template-columns: 1fr 300px;
+	 grid-template-areas: 
+		 "header header" 
+		 "content sidebar" 
+		 "footer footer";
+
+margin: 0;
+	min-height: 100vh;
+	/* Uncomment the following ff you want to center all content to a max width */
+	/*This will make sure the page can't grow beyond 960px width but can shrink*/
+
+margin: auto; 
+}
+.header {
+	/* Saying the element in HTML with the class header, goes to the header area of the defined grid. */
+	grid-area: header;
+background: #333;
+color: #fff;
+padding: 10px;
+}
+.sidebar {
+	grid-area: sidebar;
+background: #d3d3d3;
+
+padding:1em;
+
+
+}
+iframe{
+	z-index:4;
+}
+.footer {
+	grid-area: footer;
+background: #ccc;
+	    border-top: 2px solid;
+padding: 10px;
+}
+/* Conent Section Styles */
+.content {
+	grid-area: content;
+padding: 10px;
+}
+.content p {
+	line-height: 24px;
+	margin-bottom: 48px;
+}
+.content img {
+display: block;
+
+	 max-width: 90%;
+border: 4px solid #000;
+margin: 10px auto;
+}
+
+@media screen and (max-width: 767px) {
+	/* We change the body grid for the new layout */
+	body {
+		/* We switch to one column layout*/
+		grid-template-columns: 1fr;
+		/* Different parts of the application come one after another. This makes it mobile friendly layout */
+		grid-template-areas: 
+			"header"
+			"sidebar"
+			"content"
+			"footer";
+	}
+}
+body {margin: 0;
+	background-color: grey;} 
+	/* make sure that the body starts from the edge of the screen Otherwise there will be atiny ugly gap (horizontal gap) */
+
+	ul.topnav {
+		list-style-type: none;
+		/* All these are basically lists.These nav tabs are lists with the line break removed Right so they have bullets.here none means that Im saying dont put any bullets in*/
+margin: 0;
+	/* Removes again a gap. A vertical gap between the top of the browwser and the start of the nav tab */
+padding: 0;
+	 /* Removes a gap between the start of the list and the first tab */
+overflow: hidden;
+	  /* The list may extend bigger than the devoce screen size .This controls it and ensure if it overflows the overflowed content is hidden.The page responsive will make sure that it never overflows horizontally so we should ideally never lose any tab */  
+	  background-color: inherit; ;
+	}
+
+ul.topnav li {float: left;}
+/*Starts the list from the left .This basciallys forces the all the list elements to be left alligned */
+a {
+	text-decoration: none;
+
+}
+
+ul.topnav li a {
+	border-radius: 150px;
+display: block;
+	 /* The display of the elements is in the block format */
+color: white;
+       /* The colour of all the elements in this is white */
+       text-align: center;
+       /*In each block the text is center alligned */
+padding: 10px 16px;
+	 /*The gap between the content and the block is defined in terms of width and height */
+
+	 text-decoration: none;
+	 /*  Text decoration is the formatting options available like underline and  overline and strike through Here what im saying is that there is no text decoration */
+}
+
+
+ul.topnav li a:hover:not(.active) {background-color: #c9dbe9 ;}
+/* As you hover it the bkg color chnages provided that its not active THis  is the thing whiich does tthat */
+
+
+ul.topnav li .active {background-color: grey;}
+
+/*Supposed to show the current toolbar page youre in */
+li {
+
+}
+/*The border between the two nav tabs */
+
+
+
+@media screen and (max-width: 600px){
+	ul.topnav li.right, 
+		ul.topnav li {float: none;}
+	/* If you are losing 600 px screen size then this will conveert the existing nv bar to a vertical nav bar */
+}
+hr{
+color:blue;
+}

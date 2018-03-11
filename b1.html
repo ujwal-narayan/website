@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>  
+
+<html>  
+<head >  
+<title>Creepy Catterpillar Game</title> 
+<meta charset="UTF-8"> 
+<style type="text/css">  
+body { 
+
+margin: 10em 10em 10em 10em;  
+padding : 0;  
+}  
+#cheater {
+	border-style: solid;
+	border-color: grey;
+display: inline;
+padding : 1em 1em ;
+float : right;
+position : relative;
+}
+</style>  
+<!-- Jquery -->  
+<script src="jquery.min.js" type="text/javascript"></script>  
+<script>  
+$(document).ready(function () {  
+		//Canvas stuff  
+		var drawCanvas = $("#drawCanvas")[0];  
+		var context = drawCanvas.getContext("2d");  
+		var width = $("#drawCanvas").width();  
+		var height = $("#drawCanvas").height();  
+
+		var cell_width = 10;  
+		var defaultRun;  
+		var snake_food;  
+		var userscore;  
+		var mySnakeArray;  
+
+		function start() {  
+		defaultRun = "right"; //Default whn it starts it alwasy moves right  
+		createSnake();  
+		createFood();  
+		userscore = 0;  
+
+		if (typeof game_loop != "undefined") clearInterval(game_loop);  
+		game_loop = setInterval(paintSnake, 60);  //The speed of the snake 
+		}  
+		function cheat(x1,y1) {  
+			defaultRun = "right"; //Default whn it starts it alwasy moves right  
+			createSnake1(x1,y1);
+
+			//The speed of the snake 
+		}  
+		start();  
+
+		function createSnake() {  
+			var snakeSize = 6; //Intial size of the snake + food Minimum needed is 2 as 1 for snake and 1 for food any extra is automatically allocated for snake 
+			mySnakeArray = [];  
+			for (var m = 0; m<snakeSize-1;m++) {  
+				mySnakeArray.push({ x: 0, y: 50 }); //Adds an item to an array  The corodinates specfy the starting pooint of the snake 
+
+			}  
+
+		}  function createSnake1() {  
+			var snakeSize = 50; //Intial size of the snake + food Minimum needed is 2 as 1 for snake and 1 for food any extra is automatically allocated for snake 
+			userscore = 50;
+
+			mySnakeArray = [];  
+			for (var m = 0; m<snakeSize-1;m++) {  
+				mySnakeArray.push({ x: 0 , y: 0 }); //Adds an item to an array  The corodinates specfy the starting pooint of the snake 
+
+			}  
+
+		}  
+
+		function createFood() {  
+			snake_food = {  
+x: Math.round(Math.random() * (width - cell_width) / cell_width),  //Randomly creats the foods x cordinate
+   y: Math.round(Math.random() * (height - cell_width) / cell_width),  //Randomly creates the foods y coordinate
+			};  
+		}  
+		function createFood1() {  
+			snake_food = {  
+x: pop_x ,
+   y: pop_y ,
+			};
+		}   
+		function paintSnake() {  
+			context.fillStyle = "silver";  //The filler of the canvas
+			context.fillRect(0, 0, width, height);  //start from the 0 , 0 and create a ractangle of size width and height
+			context.strokeStyle = "black";  //The border colour
+			context.strokeRect(0, 0, width, height);  //Same as fillRect
+
+			var pop_x = mySnakeArray[0].x;  //Removes the las telement of the array
+			var pop_y = mySnakeArray[0].y;  //That is the tail as the logic os to replace the head with the tail every time 
+
+			if (defaultRun == "right") pop_x++;  //Tells which way for the snake to go 
+			else if (defaultRun == "left") pop_x--;  
+			else if (defaultRun == "down") pop_y++;  
+			else if (defaultRun == "up") pop_y--;  
+
+
+			if (pop_x == -1 || pop_x == width / cell_width || pop_y == -1 || pop_y == height / cell_width || check_collision(pop_x, pop_y, mySnakeArray)) {  
+				start();  //IF collission start over 
+				return;  
+			}  
+
+			if (pop_x == snake_food.x && pop_y == snake_food.y) {  
+				var snake_tail = { x: pop_x, y: pop_y };  
+				userscore++;  //Increments the score if you eat the food 
+				createFood();  
+			}  
+			else {  
+				var snake_tail = mySnakeArray.pop();  
+				snake_tail.x = pop_x; snake_tail.y = pop_y;  //Else do nothing 
+			}  
+
+			mySnakeArray.unshift(snake_tail);  //Appends the tailk to the front of the head 
+
+			for (var i = 0; i < mySnakeArray.length; i++) {  
+				var k = mySnakeArray[i];  
+
+				paintCell(k.x, k.y);  
+			}  
+
+
+			paintCell(snake_food.x, snake_food.y);  
+
+			var score_text = "Score: " + userscore; 
+			context.font = 'bold 20pt Calibri' //Sets the font 
+				context.fillText(score_text, width-200, 30); //Prints the score  
+		  
+		var maxscore_text = "Max : " + max;                                                                                 context.font = 'bold 20pt Calibri' //Sets the font                                                                              context.fillText(score_text, width-200, 30); //Prints the score 
+		}
+		function paintCell(x, y) {  
+			context.fillStyle = "limegreen";  
+			context.fillRect(x * cell_width, y * cell_width, cell_width, cell_width);  
+			context.strokeStyle = "black";  
+			context.strokeRect(x * cell_width, y * cell_width, cell_width, cell_width);  
+		}  
+
+		function check_collision(x, y, array) {  
+			for (var i = 0; i < array.length; i++) {  
+				if (array[i].x == x && array[i].y == y)  //If it ever hits the border then output the check value of border
+					return true;  
+			}  
+			return false;  
+		}
+
+		$(document).keydown(function (e) {  
+				var keyInput = e.which;  
+				if (keyInput == "40" && defaultRun != "up") defaultRun = "down";
+				if (keyInput == "83" && defaultRun != "up") defaultRun = "down";  
+				else if (keyInput == "39" && defaultRun != "left") defaultRun = "right";  
+				else if (keyInput == "38" && defaultRun != "down") defaultRun = "up";  
+				if (keyInput == "65" && defaultRun != "right") defaultRun = "left";  
+				else if (keyInput == "68" && defaultRun != "left") defaultRun = "right";  
+				else if (keyInput == "87" && defaultRun != "down") defaultRun = "up";  
+				else if (keyInput == "37" && defaultRun != "right") defaultRun = "left";  
+				else if (keyInput == "46" )  start();
+				else if (keyInput == "45") createSnake1();
+				}) 
+var max = 0;
+if (max < userscore )
+	max=userscore; 
+})  
+</script>  
+</head>  
+<body>  
+<h1> Snake Game </h1>
+
+<p> Welcome to the snake game. Control using the arrow keys . Keep in mind a snake cannot go back onto itself so if you're moving right you cannot move left.If you wanan go left then go down or up and then take a left.You can use WASD too but the browser tab wont move relative to your position So make sure you can see the entire playing region..
+<p id="cheater">        I have not cheated        </p>
+<p> As all of us like linux there is a sudo restart which restarts without reloading the page Press Delete to Delete your game. Terms and Conditions Apply </p>
+
+<button onclick="Cheats()">Cheat </button>
+
+<script>
+function Cheats() {
+	alert("Theres a button which will cause the snake size to remain the same but te score to increase.Find it. (we all know you want your snake size to increase too but hey I am not a miracle worker");
+	document.getElementById("cheater").innerHTML = "       I tried to cheat :(       ";
+}
+</script>
+<button onclick="Restart()">Restart</button>
+
+<script>
+function Restart() {
+	var rest = confirm("Restarting will cause you to lose your score.Whiners will be prosecuted and then prostituted. Click on OK if you agree to Restart");
+	if( rest == true)
+	{
+		window.open("blackmambainverted.html","_self");
+		//window.open("https://researchweb.iiit.ac.in/~ujwal.narayan/","_self");
+	}
+}
+</script>
+
+<form id="form1">  
+<div>  
+<canvas id="drawCanvas" width="1150" height="550"></canvas>  
+
+</div>  
+</form>  
+</body>  
+</html>

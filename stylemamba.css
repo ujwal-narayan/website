@@ -1,0 +1,135 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family:arial;
+  font-size:12px;
+  background: #FFFFFF;
+  margin:0;
+  padding:0;  
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration:none;
+  color: #000;
+}
+
+a:hover {
+  color: #17822c;
+}
+
+h1 {
+  font-family: 'Poiret One';
+  font-size: 72px;
+  text-align: center;
+  color: #565656;
+  margin: 0;
+}
+
+p {
+  font-family: 'Open Sans Condensed', 'sans-serif';
+  font-size: 24px;
+  text-align: center;
+  color: #000;
+}
+
+.container {
+  width:100%;
+  height:100%;
+  position:absolute;
+  margin: 15px 0;
+}
+
+#hexagons {
+  height: 145px;
+  padding: 0;
+}
+#hexacontainer {
+  margin: 20px auto;
+  padding: 0;
+  width: 800px;
+}
+
+#footer {
+  display: inline-block;
+  width: 100%;
+  font-size: 5px;
+  margin: 60px 0;
+}
+body{
+margin : 1em;
+}
+  /* make sure that the body starts from the edge of the screen Otherwise there will be atiny ugly gap (horizontal gap) */
+
+    ul.topnav {
+        list-style-type: none;
+        /* All these are basically lists.These nav tabs are lists with the line break removed Right so they have bullets.here none means that Im saying dont put any bullets in*/
+        margin: 0;
+        /* Removes again a gap. A vertical gap between the top of the browwser and the start of the nav tab */
+        padding: 0;
+        /* Removes a gap between the start of the list and the first tab */
+        overflow: hidden;
+        /* The list may extend bigger than the devoce screen size .This controls it and ensure if it overflows the overflowed content is hidden.The page responsive will make sure that it never overflows horizontally so we should ideally never lose any tab */  
+        background-color:   #ffffff ;
+    }
+
+    ul.topnav li {float: left;}
+    /*Starts the list from the left .This basciallys forces the all the list elements to be left alligned */
+
+
+    ul.topnav li a {
+        border-radius: 150px;
+        display: block;
+        /* The display of the elements is in the block format */
+        color: black;
+        /* The colour of all the elements in this is white */
+        text-align: center;
+        /*In each block the text is center alligned */
+        padding: 10px 16px;
+        /*The gap between the content and the block is defined in terms of width and height */
+
+        text-decoration: none;
+        /*  Text decoration is the formatting options available like underline and  overline and strike through Here what im saying is that there is no text decoration */
+    }
+    #myself {
+      display: block;
+        /* The display of the elements is in the block format */
+        color: black;
+        /* The colour of all the elements in this is white */
+        text-align: center;
+        /*In each block the text is center alligned */
+        padding: 10px 16px;
+        /*The gap between the content and the block is defined in terms of width and height */
+        font-size: 100px;
+        text-decoration: none;
+    }
+
+
+    ul.topnav li a:hover:not(.active) {background-color: #c9dbe9 ;}
+    /* As you hover it the bkg color chnages provided that its not active THis  is the thing whiich does tthat */
+
+
+    ul.topnav li .active {background-color: grey;}
+  
+    /*Supposed to show the current toolbar page youre in */
+    li {
+       
+    }
+    /*The border between the two nav tabs */
+    img.pic {
+        float:left;
+        width:420px;
+        height:420px;
+    }
+
+
+
+
+    @media screen and (max-width: 600px){
+        ul.topnav li.right, 
+        ul.topnav li {float: none;}
+        /* If you are losing 600 px screen size then this will conveert the existing nv bar to a vertical nav bar */
+    }
